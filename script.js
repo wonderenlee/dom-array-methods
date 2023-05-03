@@ -7,9 +7,9 @@ const calculateWealthBtn = document.getElementById('calculate-wealth');
 
 let data = [];
 
-getRandomUsers();
-getRandomUsers();
-getRandomUsers();
+getRandomUser();
+getRandomUser();
+getRandomUser();
 
 // Fetch random user and add money
 async function getRandomUser() {
@@ -41,7 +41,12 @@ function updateDOM(providedData = data) {
     providedData.forEach(item => {
         const element = document.createElement('div');
         element.classList.add('person');
-        element.innerHTML = `<strong>${item.name}</strong> ${item.money}`;
+        element.innerHTML = `<strong>${item.name}</strong> ${formatMoney(item.money)}`;
         main.appendChild(element);
     });
+}
+
+// FOrmat number as money - https://stackoverflow.com/questions/149055/how-to-format-numbers-as-currency-string
+function formatMoney(number) {
+    return '$' + number.toFixed(2).replaced(/\d(?=(\d{3})+\.)/g, '$&,');
 }
